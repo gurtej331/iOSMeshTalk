@@ -1,0 +1,23 @@
+name: Build iOS IPA
+on: workflow_dispatch
+jobs:
+  build-ios:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install XcodeGen
+        run: brew install xcodegen
+      - name: Generate Xcode Project
+        run: xcodegen generate
+      - name: Compile Unsigned App
+        run: xcodebuild -project MeshTalk.xcodeproj -scheme MeshTalk -configuration Release -sdk iphoneos SYMROOT=build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO build
+      - name: Package IPA
+        run: |
+          mkdir -p Payload
+          mv build/Release-iphoneos/MeshTalk.app Payload/
+          zip -qq -r -9 MeshTalk.ipa Payload
+      - name: Upload IPA Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: MeshTalk-Build
+          path: MeshTalk.ipa
