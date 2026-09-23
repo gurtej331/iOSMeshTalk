@@ -1,0 +1,10 @@
+name: MeshTalk
+options:
+  bundleIdPrefix: com.meshtalk
+targets:
+  MeshTalk:
+    type: application
+    platform: iOS
+    deploymentTarget: "15.0"
+    sources:
+      - path: MeshTalkiOS/MeshTalk
