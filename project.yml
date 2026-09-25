@@ -8,3 +8,8 @@ targets:
     deploymentTarget: "15.0"
     sources:
       - path: .
+    settings:
+      GENERATE_INFOPLIST_FILE: YES
+      INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription: "Bluetooth is required to connect to nearby devices and send offline messages."
+      INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription: "Bluetooth is required to connect to nearby devices and send offline messages."
+      
